@@ -8,7 +8,7 @@ interface FileListProps {
   onRefresh: () => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3020';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 export default function FileList({ files, loading, onRefresh }: FileListProps) {
   const [downloadProgress, setDownloadProgress] = useState<{ [key: string]: number }>({});

@@ -49,7 +49,7 @@ This will start the Next.js frontend on `http://localhost:3000`
 ```bash
 npm run server
 ```
-This will start the Express backend server on `http://localhost:3020`
+This will start the Express backend server on `http://localhost:3001`
 
 #### Option 2: Run Both Servers Together (Recommended)
 
@@ -64,8 +64,8 @@ This will start both the frontend and backend servers concurrently.
 Create a `.env.local` file in the root directory (optional):
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:3020
-PORT=3020
+NEXT_PUBLIC_API_URL=http://localhost:3001
+PORT=3001
 ```
 
 ## 📁 Project Structure
@@ -118,7 +118,7 @@ LiveStriming_Nextjs_Application/
 
 ## 🔧 API Endpoints
 
-### Backend API (Port 3020)
+### Backend API (Port 3001)
 
 - `GET /api/health` - Health check
 - `GET /api/videos` - List all available videos
@@ -158,7 +158,7 @@ LiveStriming_Nextjs_Application/
 
 ### Videos not showing up?
 - Make sure video files are in the `videos/` directory
-- Check that the backend server is running on port 3020
+- Check that the backend server is running on port 3001
 - Verify file extensions are supported (`.mp4`, `.webm`, `.ogg`, `.mov`, `.avi`, `.mkv`)
 
 ### Download not working?

@@ -6,7 +6,7 @@ const videoStreamHandler = require('./handlers/videoStream');
 const fileDownloadHandler = require('./handlers/fileDownload');
 
 const app = express();
-const PORT = process.env.PORT || 3020;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());

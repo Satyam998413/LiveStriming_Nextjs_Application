@@ -6,7 +6,7 @@ import FileDownloader from '@/components/FileDownloader';
 import VideoList from '@/components/VideoList';
 import FileList from '@/components/FileList';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3020';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'player' | 'downloader'>('player');
