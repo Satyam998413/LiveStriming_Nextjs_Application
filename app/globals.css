@@ -156,3 +156,11 @@ a {
   margin: 1rem 0;
 }
 
+.info {
+  background: #d1ecf1;
+  color: #0c5460;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+

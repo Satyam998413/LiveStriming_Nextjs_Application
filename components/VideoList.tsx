@@ -7,7 +7,7 @@ interface VideoListProps {
   onVideoSelect?: (filename: string) => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.2.115:3001';
 
 export default function VideoList({ videos, loading, onRefresh, onVideoSelect }: VideoListProps) {
   const formatFileSize = (bytes: number) => {

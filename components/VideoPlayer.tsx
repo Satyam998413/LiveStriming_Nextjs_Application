@@ -8,7 +8,7 @@ interface VideoPlayerProps {
   onVideoSelect?: (filename: string | null) => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.2.115:3001';
 
 export default function VideoPlayer({ videos, selectedVideo: externalSelectedVideo, onVideoSelect }: VideoPlayerProps) {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(externalSelectedVideo);

@@ -7,7 +7,7 @@ interface FileDownloaderProps {
   onFileSelect?: () => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.2.115:3001';
 
 export default function FileDownloader({ files, onFileSelect }: FileDownloaderProps) {
   const [downloadProgress, setDownloadProgress] = useState<{ [key: string]: number }>({});

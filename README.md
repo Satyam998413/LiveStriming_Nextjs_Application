@@ -6,6 +6,7 @@ A full-stack application built with Next.js and Node.js for live video streaming
 
 - **📺 Video Streaming**: Stream videos with HTTP range request support for efficient playback
 - **🎮 Video Player**: Custom video player with controls (play/pause, volume, playback speed, seek)
+- **🎥 Camera Recorder**: Capture videos directly from your device camera and upload them to the server
 - **📥 File Downloader**: Download large files with progress tracking and chunked downloads
 - **🔄 Real-time Updates**: Refresh and view available videos and files
 - **💅 Modern UI**: Beautiful, responsive user interface with gradient design
@@ -43,13 +44,13 @@ A full-stack application built with Next.js and Node.js for live video streaming
 ```bash
 npm run dev
 ```
-This will start the Next.js frontend on `http://localhost:3000`
+This will start the Next.js frontend on `http://192.168.2.115:3021` (update the port in `package.json` if you prefer a different one)
 
 **Terminal 2 - Node.js Backend:**
 ```bash
 npm run server
 ```
-This will start the Express backend server on `http://localhost:3001`
+This will start the Express backend server on `http://192.168.2.115:3001`
 
 #### Option 2: Run Both Servers Together (Recommended)
 
@@ -64,7 +65,7 @@ This will start both the frontend and backend servers concurrently.
 Create a `.env.local` file in the root directory (optional):
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_API_URL=http://192.168.2.115:3001
 PORT=3001
 ```
 
@@ -77,6 +78,7 @@ LiveStriming_Nextjs_Application/
 │   ├── page.tsx           # Main page
 │   └── globals.css        # Global styles
 ├── components/            # React components
+│   ├── CameraRecorder.tsx # Device camera recording & upload
 │   ├── VideoPlayer.tsx    # Video player component
 │   ├── VideoList.tsx      # Video list component
 │   ├── FileDownloader.tsx # File downloader component
@@ -125,6 +127,7 @@ LiveStriming_Nextjs_Application/
 - `GET /api/stream/:filename` - Stream video with range support
 - `GET /api/files` - List all available files
 - `GET /api/download/:filename` - Download file with chunked support
+- `POST /api/upload` - Upload recorded videos from the camera recorder
 
 ## 🛠️ Technologies Used
 
@@ -147,6 +150,12 @@ LiveStriming_Nextjs_Application/
 - Supports seeking without downloading the entire file
 - Compatible with HTML5 video players
 - Supports multiple video formats
+
+### Camera Recording & Uploads
+- Access device camera directly from the browser
+- Record video and review immediately
+- Upload recordings to the backend where they become available in the live videos tab
+- Automatically refresh the video list after uploads
 
 ### File Downloads
 - Chunked download support for large files

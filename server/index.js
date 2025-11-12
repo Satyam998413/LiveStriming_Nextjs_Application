@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs-extra');
+const multer = require('multer');
 const videoStreamHandler = require('./handlers/videoStream');
 const fileDownloadHandler = require('./handlers/fileDownload');
 
@@ -24,6 +25,26 @@ const downloadsDir = path.join(__dirname, '../downloads');
   }
 });
 
+// Configure file uploads
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    cb(null, videosDir);
+  },
+  filename: (_req, file, cb) => {
+    const originalExt = path.extname(file.originalname) || '.webm';
+    const baseName = path.basename(file.originalname, originalExt).replace(/\s+/g, '-');
+    const timestamp = Date.now();
+    cb(null, `${baseName || 'recording'}-${timestamp}${originalExt}`);
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 1024 * 1024 * 1024, // 1GB
+  },
+});
+
 // Serve static files
 app.use('/uploads', express.static(uploadsDir));
 app.use('/videos', express.static(videosDir));
@@ -39,6 +60,32 @@ app.get('/api/stream/:filename', videoStreamHandler);
 
 // File download endpoint
 app.get('/api/download/:filename', fileDownloadHandler);
+
+// Upload recorded videos
+app.post('/api/upload', upload.single('video'), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No video file received' });
+    }
+
+    const { filename, originalname, mimetype, size, path: filepath } = req.file;
+
+    res.status(201).json({
+      message: 'Video uploaded successfully',
+      video: {
+        filename,
+        originalName: originalname,
+        mimetype,
+        size,
+        path: filepath,
+        url: `/api/stream/${filename}`,
+      },
+    });
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ error: 'Failed to upload video' });
+  }
+});
 
 // List available videos
 app.get('/api/videos', async (req, res) => {
@@ -93,7 +140,7 @@ app.get('/api/files', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://192.168.2.115:${PORT}`);
   console.log(`📁 Videos directory: ${videosDir}`);
   console.log(`📁 Downloads directory: ${downloadsDir}`);
 });
